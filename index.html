@@ -1,0 +1,84 @@
+---
+layout: home
+title: Welcome to Squeryl
+---
+<div class="jumbotron">
+                <div class="container">
+                    <div class="logo col-sm-5 hidden-xs"><span>{{ site.name }}</span></div>
+                    <div class="col-sm-7 col-xs-12">
+                      <p>A Scala ORM and DSL for talking with Databases with minimum verbosity and maximum type safety</p>
+                      <div class="btn-container">
+                        <a href="/download.html" class="btn btn-lg btn-success" role="button">Get Started</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="suboptions">
+                <div class="container">
+                    <div class="col-sm-4">
+                        <div class="circle validated"></div>
+                        <h4>Write compiler validated statements</h4>
+                        Squeryl statements that pass compilation won’t fail at runtime. Refactor your schema as often as is required,
+                        the Scala compiler and your IDE will tell you exactly which lines of code are affected.
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="circle declaritive"></div>
+                        <h4>Write declaratively</h4>
+                        Write as declaratively as SQL, only with less boilerplate. SQL’s declarativeness is preserved, not encapsulated
+                        in a lower level API that requires imperative and procedural code to get things done.
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="circle repeated"></div>
+                        <h4>Never repeat yourself</h4>
+                        The Composability of Squeryl statements allows you to define them once and reuse them as sub queries within
+                        other statements.
+                    </div>
+                </div>
+            </div>
+
+            <div class="quotes">
+                <div class="container">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="quotedtext col-md-7 col-md-offset-1 col-xs-8">
+                                <p class="quotable">We use Squeryl to enable better QA testing with less development effort and to enhance
+                                    integrity of our database-driven applications.</p>
+                                <p class="attribution">
+                                    <strong>Andy Katz</strong>, PhD<br />
+                                    Chief Operating Officer, Genome DX
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-xs-4">
+                                <img src="/images/logos/GenomeDx_logo.png" alt="Genome DX Logo" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="quotedtext col-md-7 col-md-offset-1 col-xs-8">
+                                <p class="quotable">The best thing about Squeryl is its simplicity. It never tries to hide the database from you,
+                                    or pretend that it's something that it's not.</p>
+                                <p class="attribution">
+                                    <strong>Joe Zulli</strong><br />
+                                    Favado and Savings.com
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-xs-4">
+                                <img src="/images/logos/favado-logo-alt.png" alt="Favado Logo" class="img-responsive"/>
+                                <img src="/images/logos/client-logo-savings.png" alt="Savings.com Logo" class="img-responsive" />
+                            </div>
+                        </div>
+                      </div>
+
+                      <!-- Controls -->
+                        <!--
+                      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                      </a>
+                      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                      </a>
+                        -->
+                    </div>
+                </div>
+            </div>

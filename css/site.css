@@ -1,0 +1,86 @@
+header nav.navbar-default {
+  background-color : white;
+  background-image : none;
+  border : none;
+  margin-bottom : 0px;
+  margin-top : 10px;
+  font-size : 1.3em;
+  font-family: Neo Sans W10 Medium;
+  color : #111;
+}
+
+header .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  color: #fff;
+  background-color: #9AC31B;
+  border-radius : 5px;
+}
+
+header a.brand {
+  background-image: url(../images/squeryl_mask.png);
+  width: 61px;
+  height : 48px;
+  display : block;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+  header a.brand {
+    background-image : url(../images/squeryl_mask@2x.png);
+    background-size: 61px;
+  }
+}
+
+header a.brand span {
+  display : inline-block;
+  padding-left: 75px;
+  color : black;
+  line-height : 48px;
+  font-size : .8em;
+}
+
+div#pagetitle {
+  background-color : black;
+  min-height : 75px;
+}
+
+div#pagetitle h2 {
+  color : white;
+}
+
+div.left-nav {
+  background-color : #f5f9e8;
+  border-radius : 6px;
+  padding : 10px;
+  margin-top : 15px;
+}
+
+div.left-nav h4 {
+  color : #9bc31a;
+  font-family: Neo Sans W10 Medium;
+  /* border-top : 1px solid #c8de80; */
+}
+
+div.left-nav .nav>li>a {
+  color : black;
+  padding : 3px 5px;
+}
+h3 {
+  color : #9AC31B;
+}
+
+
+.syntaxhighlighter{
+  font-size : .95em !important;
+}
+
+.syntaxhighlighter code {
+  color : #AFAFAF !important;
+}
+
+footer {
+  margin-top : 20px;
+  background-color : black;
+  color : white;
+  min-height : 75px;
+  padding : 25px 0;
+  text-align : center;
+}
