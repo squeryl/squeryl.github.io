@@ -20,3 +20,22 @@ title: Download Squeryl
 <h2>Running the test suite</h2>
 
 <p>Testing on H2 doesn't require you to setup a database, if you build with "SBT":http://code.google.com/p/simple-build-tool you will have an "H2":http://www.h2database.com/ database ready to run the tests, and if the test succeds on H2, making it work on other DBs should be straight forward.</p>
+
+<hr />
+
+<h2>Library Management</h2>
+<p>Squeryl can also be imported using a build tool like Maven or SBT. For additional configurations, please look <a href="http://mvnrepository.com/artifact/org.squeryl">here</a>.</p>
+
+<h3>Maven</h3>
+<pre>
+    &lt;dependency>
+	    &lt;groupId>org.squeryl&lt;/groupId>
+	    &lt;artifactId>squeryl_2.10&lt;/artifactId>
+	    &lt;version>0.9.5-6&lt;/version>
+    &lt;/dependency>
+</pre>
+
+<h3>SBT</h3>
+<pre>
+  libraryDependencies += "org.squeryl" % "squeryl_2.10" % "0.9.5-6"
+</pre>
