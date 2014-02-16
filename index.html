@@ -4,7 +4,7 @@ title: Welcome to Squeryl
 ---
 <div class="jumbotron">
                 <div class="container">
-                    <div class="logo col-sm-5 hidden-xs"><span>{{ site.name }}</span></div>
+                    <div class="col-sm-5 hidden-xs"><div class="logo"><span>{{ site.name }}</span></div></div>
                     <div class="col-sm-7 col-xs-12">
                       <p>A Scala ORM and DSL for talking with Databases with minimum verbosity and maximum type safety</p>
                       <div class="btn-container">
@@ -16,22 +16,28 @@ title: Welcome to Squeryl
             <div class="suboptions">
                 <div class="container">
                     <div class="col-sm-4">
-                        <div class="circle validated"></div>
-                        <h4>Write compiler validated statements</h4>
-                        Squeryl statements that pass compilation won’t fail at runtime. Refactor your schema as often as is required,
-                        the Scala compiler and your IDE will tell you exactly which lines of code are affected.
+                        <div class="col-xs-3 col-sm-12"><div class="circle validated"></div></div>
+                        <div class="col-xs-9 col-sm-12">
+                            <h4>Write compiler validated statements</h4>
+                            Squeryl statements that pass compilation won’t fail at runtime. Refactor your schema as often as is required,
+                            the Scala compiler and your IDE will tell you exactly which lines of code are affected.
+                        </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="circle declaritive"></div>
-                        <h4>Write declaratively</h4>
-                        Write as declaratively as SQL, only with less boilerplate. SQL’s declarativeness is preserved, not encapsulated
-                        in a lower level API that requires imperative and procedural code to get things done.
+                        <div class="col-xs-3 col-sm-12"><div class="circle declaritive"></div></div>
+                        <div class="col-xs-9 col-sm-12">
+                            <h4>Write declaratively</h4>
+                            Write as declaratively as SQL, only with less boilerplate. SQL’s declarativeness is preserved, not encapsulated
+                            in a lower level API that requires imperative and procedural code to get things done.
+                        </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="circle repeated"></div>
-                        <h4>Never repeat yourself</h4>
-                        The Composability of Squeryl statements allows you to define them once and reuse them as sub queries within
-                        other statements.
+                        <div class="col-xs-3 col-sm-12"><div class="circle repeated"></div></div>
+                        <div class="col-xs-9 col-sm-12">
+                            <h4>Never repeat yourself</h4>
+                            The Composability of Squeryl statements allows you to define them once and reuse them as sub queries within
+                            other statements.
+                        </div>
                     </div>
                 </div>
             </div>

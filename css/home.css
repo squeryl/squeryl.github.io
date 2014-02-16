@@ -40,10 +40,6 @@ div.jumbotron {
   background-repeat : no-repeat;
 }
 
-div.jumbotron p {
-  padding : 0 10px;
-}
-
 div.jumbotron a.btn-success {
   background-color : #9AC31B;
   border-color : #222;
@@ -73,7 +69,6 @@ div.jumbotron div.btn-container {
 .carousel-control.left, .carousel-control.right {
   background-image : none;
 }
-
 
 @media screen and (min-width: 768px) {
   div.jumbotron p {
@@ -107,6 +102,7 @@ div.suboptions div.circle {
   height : 100px;
   margin : auto;
   background-image : url(../images/home_circles.png);
+  background-repeat : no-repeat;
 }
 
 div.suboptions div.circle.validated {
@@ -170,6 +166,36 @@ footer {
   }
 }
 
+@media screen and (max-width: 500px) {
+  div.suboptions div.circle {
+    width : 75px;
+    height : 75px;
+    background-size : 225px;
+  }
+  div.suboptions div.circle.declaritive {
+    background-position : -75px 0;
+  }
+
+  div.suboptions div.circle.repeated {
+    background-position : -150px 0;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.suboptions div.circle {
+    width : 50px;
+    height : 50px;
+    background-size : 150px;
+  }
+  div.suboptions div.circle.declaritive {
+    background-position : -50px 0;
+  }
+
+  div.suboptions div.circle.repeated {
+    background-position : -100px 0;
+  }
+}
+
 @media screen and (max-width: 1200px) and (-webkit-min-device-pixel-ratio: 2) {
   div.logo {
     width: 360px;
@@ -183,5 +209,29 @@ footer {
     width: 280px;
     height: 230px;
     background-size: 280px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header a.brand {
+    background-image: url(../images/squeryl_mask.png);
+    width: 61px;
+    height : 48px;
+    display : block;
+  }
+  header a.brand span {
+    display : inline-block;
+    padding-left: 75px;
+    color : black;
+    line-height : 48px;
+    font-size : .8em;
+  }
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px), screen and (max--moz-device-pixel-ratio: 2) and (max-width: 768px) {
+  header a.brand {
+    background-image : url(../images/squeryl_mask@2x.png);
+    background-size: 61px;
   }
 }
