@@ -166,35 +166,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 500px) {
-  div.suboptions div.circle {
-    width : 75px;
-    height : 75px;
-    background-size : 225px;
-  }
-  div.suboptions div.circle.declaritive {
-    background-position : -75px 0;
-  }
 
-  div.suboptions div.circle.repeated {
-    background-position : -150px 0;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  div.suboptions div.circle {
-    width : 50px;
-    height : 50px;
-    background-size : 150px;
-  }
-  div.suboptions div.circle.declaritive {
-    background-position : -50px 0;
-  }
-
-  div.suboptions div.circle.repeated {
-    background-position : -100px 0;
-  }
-}
 
 @media screen and (max-width: 1200px) and (-webkit-min-device-pixel-ratio: 2) {
   div.logo {
@@ -212,6 +184,17 @@ footer {
   }
 }
 
+@media screen and (max-width: 992px) {
+  div.logo {
+    width: 280px;
+    height: 230px;
+    background-size: 280px;
+  }
+  div.quotes {
+    min-height : 340px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   header a.brand {
     background-image: url(../images/squeryl_mask.png);
@@ -225,6 +208,43 @@ footer {
     color : black;
     line-height : 48px;
     font-size : .8em;
+  }
+  div.quotes {
+    min-height : 400px;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  div.suboptions div.circle {
+    width : 75px;
+    height : 75px;
+    background-size : 225px;
+  }
+  div.suboptions div.circle.declaritive {
+    background-position : -75px 0;
+  }
+
+  div.suboptions div.circle.repeated {
+    background-position : -150px 0;
+  }
+  div.quotes {
+    min-height : 550px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.suboptions div.circle {
+    width : 50px;
+    height : 50px;
+    background-size : 150px;
+  }
+  div.suboptions div.circle.declaritive {
+    background-position : -50px 0;
+  }
+
+  div.suboptions div.circle.repeated {
+    background-position : -100px 0;
   }
 
 }
