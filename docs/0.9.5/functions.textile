@@ -1,7 +1,7 @@
 ---
 layout: manual
 title: SQL Functions
-headtitle: SQL Functions - 
+headtitle: SQL Functions -
 ---
 
 h2. Conversion Functions
@@ -14,13 +14,13 @@ h2. Operators
 
 h4. Boolean :
 
-not, isNull, isNotNull, between, ===, <, lt, >, gt, <=, lte, <=, gte, <>, exists, notExists, in, notIn
+not, isNull, isNotNull, between, ===, <, lt, >, gt, <=, lte, gte, <>, exists, notExists, in, notIn
 
 h4. Math :
 
 plus, +, minus, -, times, *, div, /
 
-h4. String : 
+h4. String :
 
  || (concatenation), lower, upper, like, regex
 
