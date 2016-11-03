@@ -73,4 +73,4 @@ Info on building is found "here":http://github.com/max-l/Squeryl
 
 h2. Running the test suite
 
-Testing on H2 doesn't require you to setup a database, if you build with "SBT":http://code.google.com/p/simple-build-tool you will have an "H2":http://www.h2database.com/ database ready to run the tests, and if the test succeds on H2, making it work on other DBs should be straight forward.
+Testing on H2 doesn't require you to setup a database, if you build with "SBT":https://github.com/sbt/sbt you will have an "H2":http://www.h2database.com/ database ready to run the tests, and if the test succeds on H2, making it work on other DBs should be straight forward.
