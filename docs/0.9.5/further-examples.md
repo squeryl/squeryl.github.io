@@ -1,0 +1,16 @@
+---
+layout: manual
+title: Further Examples
+headtitle: Further Examples - 
+---
+
+The most extensive examples are from the test suite, there are two  
+schemas with a bunch of statements for each :
+
+[MusicDb.scala](http://github.com/max-l/Squeryl/blob/master/src/test/scala/org/squeryl/test/musicdb/MusicDb.scala)
+
+[SchoolDb.scala](http://github.com/max-l/Squeryl/blob/master/src/test/scala/org/squeryl/test/schooldb/SchoolDb.scala)
+
+There is another MusicDb schema here :
+
+[MusicDb.scala](http://github.com/max-l/Squeryl/blob/master/src/test/scala/org/squeryl/test/demo/MusicDb.scala)

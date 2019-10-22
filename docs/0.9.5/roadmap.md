@@ -1,0 +1,60 @@
+---
+layout: default
+title: Roadmap
+headtitle: Roadmap - 
+---
+
+### Release 0.9.6
+
+[Ticket
+list](http://www.assembla.com/spaces/squeryl/milestones/855683-0-9-6)
+
+### Wish list of *highly* desired features (Unscheduled)
+
+-   Free text indexing via integration of Lucene
+
+### Features at the brainstorming stage
+
+-   Caching : the goal here is not to have a *transparent* cache, but to
+    give a few building blocks that can be leveraged to build caches at
+    the application level.
+
+<!-- -->
+
+-   Support for mapping inheritance in the database other than the *map
+    each concreate class to a table* approach
+
+<!-- -->
+
+-   A compiler plugin that provides a greater level of validation
+    <br/><br/>  
+    Right now there are still ways that one can write an invalid
+    query,  
+    i.e. one for which the database will complain at runtime.  
+    For one can call an aggregate function within a group by clause
+    without  
+    the compiler preventing it.<br/><br/>  
+    I have experimented with ways of enforcing this using the type
+    system,  
+    but it adds complexity not only to the implementation but to the the
+    DSL. <br/><br/>  
+    A plugin could also give more explanatory (SQL specific) messages
+    than the  
+    ones given by the type system. <br/><br/>  
+    At the moment my only reluctance for such a plugin is the required  
+    configuration that is required by user code (breaking the
+    minimalism),  
+    for this reason, the plugin should limit itself to validation.
+
+<!-- -->
+
+-   Support for mapping inheritance in the database other than the *map
+    each concrete class to a table* approach
+
+<!-- -->
+
+-   Schema evolution (other than dropping the whole database and
+    recreating it)
+
+Proposals for new features should go to the [discussion
+group](http://groups.google.com/group/squeryl)
