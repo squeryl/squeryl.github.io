@@ -1,0 +1,183 @@
+---
+layout: default
+title: Releases
+headtitle: Releases - 
+---
+
+
+h3. 0.9.5
+
+* Dynamic orderBy
+* Fix error with enumerations within groupBy
+
+h3. 0.9.5-RC2
+
+* Cryptic error message upon field type deduction failure became more explicit.
+* added transaction and inTransaction that takes a SessionFactory
+
+
+h3. 0.9.5-RC1
+
+* "List of closed tickets":http://www.assembla.com/spaces/squeryl/milestones/381461-0-9-5-rc1
+
+h4. Additional changes : 
+
+* migration to sbt 0.10.x
+* Fix case statement with String (varchar) return type for Oracle
+* SQLServer adapter quotes idendifiers
+* SQL Server: Properly quote identifiers to allow using reserved words in field names
+* added def transaction[A](s: Session)(a: =>A)
+* Convert === None to SQL o is null
+* fail safe close on the jdbc connection when it fails on commit or rollback
+* Fixed an issue with retrieval of @ScalaSig data.
+* Option type deduction was failing for POSOs with a lot of fields (~50).  This method relies more on scalap.  Also, added turned off SBTs default filtering of the scala-complier.  The compiler is a dependency of scalap and is necessary for the @ScalaSig retrieval and parsing.
+* Changed ThreadLocal handing so that they get cleaned up after use. To be sure, all ThreadLocals are also initialized with null values.
+* Support Enumerations in IN. Added also a test case of .? that does not compile
+* adding update method to the ActiveRecord
+* Postgres/DB2/Oracle now honor uninsertable field meta data flag
+* Support unupdatable, uninsertable in schema DSL for columns
+* Do not persist static fields of POSOs
+* Add implicit so that nvl on a Timestamp followed by >= compiles.
+* Previously, the compiler would report the following error:
+* value >= is not a member of org.squeryl.dsl.NvlFunctionNonNumerical[Option[org.squeryl.PrimitiveTypeMode.TimestampType],org.squeryl.PrimitiveTypeMode.TimestampType]
+* added implicit conv for Option[BinaryType]
+* Fixed an issue where .leftOuter.inhibitWhen led to an inner join being performed by adding an inhibitWhen method on OuterJoinedQueryable.  This also means that inhibiting a leftOuter will now result in an Option[T] rather than an Option[Option[T]]
+* Added implicts to handle lists of UUIDs
+* Removal of deprecated  Boolean -> LogicalBoolean implicit conversion
+* Fix of : having being inhibited when followed by compute
+
+
+h3. 0.9.4 Final
+
+* http://www.assembla.com/spaces/squeryl/tickets/52-missing-implicit-for-compute%28min%28atimestamp%29%29 
+* http://www.assembla.com/spaces/squeryl/tickets/49-allow-specifying-the-name-of-manytomany-relations 
+ 
+h3. 0.9.4-RC7
+
+* #8    columns get duplicated in the select clause on Posos that have reentrant property accessors
+* #9    An enumerations in a subquery within an 'in' operator, causes the outter query to contain the enumeration in the select clause
+* #35   Add support for EXISTS / NOT EXISTS
+* #32   UUID support
+* #14   Assertion fails on self referring OneToManyRelationship
+* #34   LeftOuter join does not work in some orderings of the from/join clause
+* #40   Nested JOINs aren't mapped correctly
+* #10   avg() not supporting BigDecimal type on RC4
+* #27   inhibitWhen cannot be used with isNotNull
+* #46   def id' on non composite KeyedEntity backed by another field causes assertion failure
+* #48   Constant nodes sould have a mapper, or select(&lower("aConstant")) should work
+* #1    Convert all tests to ScalaTest
+
+h3. 0.9.4-RC6
+
+*    Tool for consolidating multiple stats DBs
+*    Fix for issue 107 (in(Set) in where clause has incorrect number of params)
+* 	 Fix #56: Prevent compilation of mass update without where clause
+*    Fixed having clause, it was simply not working ...
+*    Fix for gitHub issue 101
+*    Fix for github issue 99 (join on computed column of aggregate query throws ClassCastException)
+*    Fix for (github) issue 100 (Cannot use aggregate query on right hand side of an IN clause)
+*    Prevent Yield inspection from following scala.Enumerations fixes #9
+*    Yield inspection now cancels the effect of reentrant  calls in property accessors fixes #8
+*    Added Hook for influencing YieldInspection (to be used by lift*squeryl*record)
+*    Crash early when on/declare is given a null table
+*    Support for subqueries in set clause of partial update, fixes #6
+*    Closes #93: Add secondary constructors in custom types
+*    Aggregate (groupBy and compute) return Group[ProductX] instead of Group[TupleX],
+*    Closes #43: Equality expression not reversible in OneToMany
+*    fixes #2: Support query pagination in DerbyAdapter
+*    implicit conversion from boolean to LogicalBoolean, to allow this kind of syntax sugar :
+<pre>      
+    students.where(s => s.isMultilingual)
+  as opposed to :
+    students.where(s=> s.isMultilingual===true)    
+</pre>	
+*    fixes #3 (assign method in relations broken when using CustomTypes)
+*    added Derby support
+*    Quote identifiers in emitted SQL
+*    Fix for issue 89 : update(T)(t => where(t.id in (subselect)) set(...))" generates invalid SQL
+*    Fix bug in Session.cleanupResources.
+    Add ability for Session to print info about unclosed Statements to aid in fixing statement leaks.
+    Make the iterator returned by AbstractQuery also implement Closeable.
+    Force iterator in View.lookup to be closed after use.
+	
+*    CompositeKey support now up to 9 columns
+    Fix for issue 79 (Returning or excepting out of nested transaction block kills session)
+    eager closing of preparedStatement for DB updates
+
+h3. 0.9.4-RC3
+
+*  compiled against Scala 2.8.1
+*  Externalisation of POSO creation, now part of the FieldMetaDataFactory (for fixing metadata in Lift squery-record)
+*  fix for issue 68 Invoking a persisent field during construction causes interference in AST construction
+*  Allow the many side of a one-to-many relatonship to be a non-KeyedEntity.
+*  Fixed/finished support for Binary/Array[Byte] types. (thanks to Michael Bayne)
+*  fix for issue 61: Schema.defaultsTo(T) on Enumerations outputs String instead of Int
+*  Fix for issue 59 on/declare expression on KeyedEntity.id doesn't override the schema default attributes
+*  MSSQL support (*note* : query pagination, not yet working...)
+*  Fix for issue 51 : update fails with KeyedEntities[CompositeKey[...]]
+*  Fix for issue 52 : regex expression not passed as param to jdbc prepared statement.
+
+
+h3. 0.9.4-RC2
+
+*   Fix for issue 48 (Exception thrown in outer join with subquery member)
+    the problem was that the ordering of the table expression was not strict, so the from expression
+    would get mixed with a join expression.
+*   test case for outer join with group by
+*   Support for overriding default database column type declaration
+*   Fix for issue 45 (Timestamp as query input param gets truncated)
+*   @transient applied to PersistenceStatus._isPersisted
+*   Fix for issue 16 : SQL 'in' operator now accepts empty lists and inhibits
+    "not in (empty)" tautology and returns an always false for "in (empty)"
+      http://github.com/max-l/Squeryl/issues#issue/16
+*   Fix for issue 42 (problems creating indices: missing single-column indices)
+*    Moved annotations package to adhere to the convention
+*   Fix for issue 44 (Class cast exception on OneToMany query)
+
+
+h3. 0.9.4-RC1
+
+Features :
+
+* OneToMany and ManyToMany 	"Relations":relations.html
+* "Composite Keys":http://squeryl.org/composite-keys.html
+* Support for BigDecimal, (kindly contributed by Antti Tuppurainen)
+* Support for Binary column type (graciousness of Mitsutoshi Aoe)
+* Support for Injection of custom SQL functions by implit conversions
+* Enhancements to "Schema Definition":schema-definition.html : declaration of column attributes for schema creation (indexes, uniqueness constraint, auto increment, etc...)
+* Support for DB2 (a huge thanks to Christian Maslen) 
+* Fully qualified table names, i.e. support for prefixing table names with the schema name "issue #2":http://github.com/max-l/Squeryl/issues#issue
+* Injection of SQL functions by implicit conversion
+* regex, lower, upper string functions
+* "Dynamic where clause definition":dynamic-queries.html#dyn-where-clause
+* Redesign of inner,outer joins with new *join* function
+* Lift support (Lift 2.0 M2)
+* fixed a bunch of "issue":http://github.com/max-l/Squeryl/issues/closed
+ 
+As well as a few minor enhancements and bug fixes.
+
+Contributors to this release (in alphabetical order) :
+
+*  Alec Wysoker
+*  Antti Tuppurainen
+*  Christian Maslen
+*  David Flemström
+*  Mitsutoshi Aoe
+
+h3. 0.9.3 
+
+* Batched updates and inserts
+* Optimistic Concurrency Control
+* Declarative transactions
+
+
+h3. 0.9.2
+
+* Paginated Queries
+* Dynamic inhibition (removal) of query elements
+
+h3. 0.9.1
+
+First published version of Squeryl
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
