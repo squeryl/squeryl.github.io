@@ -99,5 +99,5 @@ While this approach is adequate for simple cases it can lead to verbose
 imperative code and excessive round trips to the database, which is why
 they all have a (string based) query language (HQL, JPA-QL, etc..)  
 <a name='squeryl-control-granularity-more'></a>  
-{% include 0.9.5/squeryl-control-granularity-intro.html } { include
-0.9.5/squeryl-control-granularity-more.html %}
+{% include 0.9.5/squeryl-control-granularity-intro.html %} 
+{% include 0.9.5/squeryl-control-granularity-more.html %}
