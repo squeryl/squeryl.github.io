@@ -14,13 +14,13 @@ The insert mechanism is the least surprising of all :
 <![CDATA[
 
 val herbyHancock =  
-artists.insert(new Artist(“Herby Hancock”))
+artists.insert(new Artist("Herby Hancock"))
 
 val ponchoSanchez =  
-artists.insert(new Artist(“Poncho Sanchez”))
+artists.insert(new Artist("Poncho Sanchez"))
 
 val theMeters =  
-artists.insert(new Artist(“The Meters”))  
+artists.insert(new Artist("The Meters"))  
 ]]>
 
 </script>
@@ -54,10 +54,10 @@ songs.update(watermelonMan)
 
 <![CDATA[
 
-update(songs)(s =\>  
-where(s.title === “Watermelon Man”)  
-set(s.title := “The Watermelon Man”,  
-s.year := s.year.\~ + 1)  
+update(songs)(s =>  
+where(s.title === "Watermelon Man")  
+set(s.title := "The Watermelon Man",  
+s.year := s.year.~ + 1)  
 )  
 ]]>
 
@@ -86,7 +86,7 @@ To update all rows use the setAll function :
 <script type="syntaxhighlighter" class="brush: scala">
 
 <![CDATA[  
-update(songs)(s =\> setAll(s.year := s.year.\~ + 1))  
+update(songs)(s => setAll(s.year := s.year.~ + 1))  
 ]]>
 
 </script>
@@ -104,12 +104,12 @@ example of Table\[PlaylistElement\].deleteWhere usage :
 <![CDATA[
 
 def removeSong(song: Song) =  
-playlistElements.deleteWhere(ple =\> ple.songId === song.id)
+playlistElements.deleteWhere(ple => ple.songId === song.id)
 
 def removeSongOfArtist(artist: Artist) =  
-playlistElements.deleteWhere(ple =\>  
+playlistElements.deleteWhere(ple =>  
 (ple.playlistId === id) and  
-(ple.songId in from(songsOf(artist.id))(s =\> select(s.id)))  
+(ple.songId in from(songsOf(artist.id))(s => select(s.id)))  
 )
 
 ]]>
@@ -131,27 +131,27 @@ trips (given an iterable with N elements).
 <![CDATA[
 
 addresses.insert(List(  
-new Address(“St-Dominique”,14, None,None,None),  
-new Address(“St-Urbain”,23, None,None,None),  
-new Address(“Sherbrooke”,1123, None,Some(454),Some(“B”))  
+new Address("St-Dominique",14, None,None,None),  
+new Address("St-Urbain",23, None,None,None),  
+new Address("Sherbrooke",1123, None,Some(454),Some("B"))  
 ))
 
 addresses.insert(List(  
-new Address(“Van Horne”,14, None,None,None)  
+new Address("Van Horne",14, None,None,None)  
 ))
 
-val q = addresses.where(a =\> a.streetName in streetNames)
+val q = addresses.where(a => a.streetName in streetNames)
 
-assertEquals(4, q.Count : Long, “batched update test failed”)
+assertEquals(4, q.Count : Long, "batched update test failed")
 
 // The update here is one in a single DB trip :
 
-addresses.update(q.map(a =\>{a.streetName += “Z”; a}))
+addresses.update(q.map(a =>{a.streetName += "Z"; a}))
 
-val updatedStreetNames = List(“Van HorneZ”, “SherbrookeZ”, “St-UrbainZ”,
-“St-DominiqueZ”)
+val updatedStreetNames = List("Van HorneZ", "SherbrookeZ", "St-UrbainZ",
+"St-DominiqueZ")
 
-val updatedQ = addresses.where(a =\> a.streetName in updatedStreetNames)
+val updatedQ = addresses.where(a => a.streetName in updatedStreetNames)
 
 ]]>
 
