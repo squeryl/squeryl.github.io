@@ -11,7 +11,7 @@ The insert mechanism is the least surprising of all :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
 val herbyHancock =  
 artists.insert(new Artist(“Herby Hancock”))
@@ -21,7 +21,7 @@ artists.insert(new Artist(“Poncho Sanchez”))
 
 val theMeters =  
 artists.insert(new Artist(“The Meters”))  
-\]\]\>
+]]>
 
 </script>
 
@@ -39,12 +39,12 @@ There are two forms of updates :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
 watermelonMan.title = “The Watermelon Man”  
 watermelonMan.year = watermelonMan.year + 1  
 songs.update(watermelonMan)  
-\]\]\>
+]]>
 
 </script>
 
@@ -52,14 +52,14 @@ songs.update(watermelonMan)
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
 update(songs)(s =\>  
 where(s.title === “Watermelon Man”)  
 set(s.title := “The Watermelon Man”,  
 s.year := s.year.\~ + 1)  
 )  
-\]\]\>
+]]>
 
 </script>
 
@@ -67,13 +67,13 @@ The SQL will be :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+<![CDATA[  
 update Song set  
 title = ?,  
 year = (year + ?)  
 Where  
 (title = ?)  
-\]\]\>
+]]>
 
 </script>
 
@@ -85,9 +85,9 @@ To update all rows use the setAll function :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+<![CDATA[  
 update(songs)(s =\> setAll(s.year := s.year.\~ + 1))  
-\]\]\>
+]]>
 
 </script>
 
@@ -101,7 +101,7 @@ example of Table\[PlaylistElement\].deleteWhere usage :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[
+<![CDATA[
 
 def removeSong(song: Song) =  
 playlistElements.deleteWhere(ple =\> ple.songId === song.id)
@@ -112,7 +112,7 @@ playlistElements.deleteWhere(ple =\>
 (ple.songId in from(songsOf(artist.id))(s =\> select(s.id)))  
 )
 
-\]\]\>
+]]>
 
 </script>
 
@@ -128,7 +128,7 @@ trips (given an iterable with N elements).
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
 addresses.insert(List(  
 new Address(“St-Dominique”,14, None,None,None),  
@@ -153,7 +153,7 @@ val updatedStreetNames = List(“Van HorneZ”, “SherbrookeZ”, “St-UrbainZ
 
 val updatedQ = addresses.where(a =\> a.streetName in updatedStreetNames)
 
-\]\]\>
+]]>
 
 </script>
 
@@ -167,12 +167,12 @@ without the invocation of the insert method of the respective table :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
-import MusicDb.\_
+import MusicDb._
 
-new Artist(“Herby Hancock”).save  
-\]\]\>
+new Artist("Herby Hancock").save  
+]]>
 
 </script>
 
@@ -181,14 +181,14 @@ Active Record pattern :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+<![CDATA[
 
-import MusicDb.\_
+import MusicDb._
 
-watermelonMan.title = “The Watermelon Man”  
+watermelonMan.title = "The Watermelon Man"  
 watermelonMan.year = watermelonMan.year + 1  
 watermelonMan.update  
-\]\]\>
+]]>
 
 </script>
 
