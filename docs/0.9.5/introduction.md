@@ -32,8 +32,6 @@ Here is a comparison of a Squeryl and a JPA version of the same query :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
-
 //All is validated at compile time here :
 
 var avg: Option\[Float\] = // The compiler ‘knows’ that this query
@@ -43,8 +41,6 @@ from(grades)(g =\>
 where(g.subjectId === mathId)  
 compute(avg(g.scoreInPercentage))  
 )
-
-\]\]\>
 
 </script>
 <!--
@@ -60,9 +56,6 @@ The equivalent JPA query invocation is subject to a runtime failure at
 five places :
 
 <script type="syntaxhighlighter" class="brush: java">
-
-\<!\[CDATA\[
-
 // Equivalent JPA query  
 Query q = entityManager.createQuery(  
 //We’ll get an SQLException if there’s a typo here :  
@@ -78,7 +71,6 @@ Number avg = (Number) q.getSingleResult();
 // NullPointerException if the query returns null  
 //(ex.: if there are no math Grades in the table)  
 avg.floatValue();  
-\]\]\>
 
 </script>
 
