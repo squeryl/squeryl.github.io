@@ -17,8 +17,6 @@ Declare the Squeryl dependency in the SBT project definiition
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
-
 libraryDependencies <span class="underline"></span>= Seq(  
 “org.squeryl” “squeryl” % “0.9.5-7”,  
 yourDatabaseDependency  
@@ -31,8 +29,6 @@ val mysqlDriver = “mysql” % “mysql-connector-java” % “5.1.10”
 val posgresDriver = “postgresql” % “postgresql” % “8.4-701.jdbc4”  
 val msSqlDriver = “net.sourceforge.jtds” % “jtds” % “1.2.4”  
 val derbyDriver = “org.apache.derby” % “derby” % “10.7.1.1”
-
-\]\]\>
 
 </script>
 
