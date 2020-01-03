@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Frequently Asked Questions
-headtitle: Frequently Asked Questions - 
+headtitle: Frequently Asked Questions -
 ---
 
 ### Q: What kind of caching mechanism is supported ?
@@ -13,11 +13,11 @@ caching with lazy loading is possible :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 class Song(val id, val title: String, val artistId: Long) {  
 lazy val artist = artists.where(a =\> a.id === artistId).single  
 }  
-\]\]\>
+
 
 </script>
 

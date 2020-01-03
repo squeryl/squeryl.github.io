@@ -11,7 +11,7 @@ A two table join :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 class Playlist(var id: Long, var name: String, var path: String) extends
 KeyedEntity\[Long\] {
 
@@ -25,7 +25,7 @@ select(s)
 orderBy(ple.songNumber asc)  
 )  
 }  
-\]\]\>
+
 
 </script>
 
@@ -38,7 +38,7 @@ The **join** keyword
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val ratingsForAllSongs =  
 join(songs, ratings.leftOuter)((s,r) =\>  
@@ -50,7 +50,7 @@ for(sr \<- ratingsForAllSongs)
 println(sr.\_1.title + " rating is " +  
 sr.\_2.map(r =\> r.appreciationScore.toString).getOrElse(“not rated”))
 
-\]\]\>
+
 
 </script>
 
@@ -58,7 +58,7 @@ produces :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+
 Select  
 Song1.id as Song1\_id,  
 Rating2.songId as Rating2\_songId,  
@@ -73,7 +73,7 @@ Song1.id as Song1\_id
 From  
 Song Song1  
 left outer join Rating as Rating2 on (Song1.id = Rating2.songId)  
-\]\]\>
+
 
 </script>
 
@@ -81,7 +81,7 @@ A join can also be an agreate query, for example :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val q =  
 join(artists,songs.leftOuter)((a,s)=\>  
 groupBy(a.id, a.firstName)  
@@ -89,7 +89,7 @@ compute(countDistinct(s.map(\_.id)))
 on(a.id === s.map(\_.authorId))  
 )
 
-\]\]\>
+
 
 </script>
 
@@ -99,7 +99,7 @@ following SQL :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+
 Select  
 Person1.id as g0,  
 Person1.firstName as g1,  
@@ -110,7 +110,7 @@ left outer join Song as Song2 on (Person1.id = Song2.authorId)
 Group By  
 Person1.id,  
 Person1.firstName  
-\]\]\>
+
 
 </script>
 
@@ -118,7 +118,7 @@ Of course, like in SQL, a **join** can have a where clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val q =  
 join(artists,songs.leftOuter)((a,s)=\>  
 where(a.id in myListOfArtistId)  
@@ -126,7 +126,7 @@ groupBy(a.id, a.firstName)
 compute(countDistinct(s.map(\_.id)))  
 on(a.id === s.map(\_.authorId))  
 )  
-\]\]\>
+
 
 </script>
 
@@ -135,13 +135,13 @@ the i’th ‘on’ condition corresponds to the i’th table expression :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 join(T, A1, A2,… AN)((a1,a2,…,aN) =\>  
 …  
 on(…condition for a1…,…condition for a2…,……condition for aN…, )  
 )  
-\]\]\>
+
 
 </script>
 
@@ -159,7 +159,7 @@ member to be an Option\[Rating\]
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val ratingsForAllSongs =  
 from(songs, ratings)((s,r) =\>  
@@ -170,7 +170,7 @@ for(sr \<- ratingsForAllSongs)
 println(sr.\_1.title + " rating is " +  
 sr.\_2.map(r =\> r.appreciationScore.toString).getOrElse(“not rated”))
 
-\]\]\>
+
 
 </script>
 
@@ -190,7 +190,7 @@ The SQL of the previous query is :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+
 Select  
 Song1.id as Song1\_id,  
 Rating2.songId as Rating2\_songId,  
@@ -205,6 +205,6 @@ Song1.id as Song1\_id
 From  
 Song Song1  
 left outer join Rating as Rating2 on (Song1.id = Rating2.songId)  
-\]\]\>
+
 
 </script>

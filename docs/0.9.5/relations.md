@@ -24,7 +24,7 @@ stateful relations are described [here](stateful-relations.html) .
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 object SchoolDb extends Schema {
 
@@ -49,7 +49,7 @@ lazy val courses: OneToMany\[Course\] =
 SchoolDb.subjectToCourses.left(this)  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -61,7 +61,7 @@ that assigns the keys while leaving the database unchanged. The
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 trait OneToMany\[M\] extends Query\[M\] {
 
 /  
@@ -89,7 +89,7 @@ def assign(one: O): O
 def delete: Boolean  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -107,7 +107,7 @@ The association table can have other fields besides the *left* and
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class CourseSubscription(val courseId: Int, val studentId: Int, val
 grade: Float) extends KeyedEntity\[CompositeKey2\[Int,Int\]\] {  
@@ -143,7 +143,7 @@ Query\[Course\]
 lazy val courses = SchoolDb2.courseSubscriptions.right(this)  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -151,7 +151,7 @@ Examples of many to many relation usage :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // the following two lines are equivalent, they both create  
 // and insert a CourseSubscription, with the proper foreign keys :
@@ -180,7 +180,7 @@ val cs:CourseSubscription = olga.courses.assign(physics)
 // persistent :  
 SchoolDb.courseSubscriptions.insert(cs)
 
-\]\]\>
+
 
 </script>
 
@@ -188,7 +188,7 @@ SchoolDb.courseSubscriptions.insert(cs)
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 /  
 \* This trait is what is referred by both the left and right side of a
 manyToMany relation.  
@@ -273,7 +273,7 @@ along with their association object
 \*/  
 def associationMap: Query\[(O,A)\]  
 }  
-\]\]\>
+
 
 </script>
 
@@ -289,7 +289,7 @@ foreign key constraints to be inhibited.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 object SchoolDb2 extends Schema {
 
@@ -328,7 +328,7 @@ courseSubscriptions.leftForeignKeyDeclaration.constrainReference(onDelete
 cascade)  
 }
 
-\]\]\>
+
 
 </script>
 

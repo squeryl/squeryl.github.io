@@ -1,12 +1,12 @@
 ---
 layout: default
 title: examples
-headtitle: Examples - 
+headtitle: Examples -
 ---
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 package org.squeryl.demos;
 
@@ -173,6 +173,6 @@ val freedomSound = ponchoSanchez.newSong(“Freedom Sound”, None)
 }  
 }
 
-\]\]\>
+
 
 </script>

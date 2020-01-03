@@ -15,7 +15,7 @@ therefore is not useable as a subquery in a from or join clause*
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class Person(val firstName: val age: Int)
 
@@ -23,7 +23,7 @@ ASchema extends Schema {
 val people = table\[Person\]  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -32,7 +32,7 @@ clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val peopleQuery1 =  
 from(people)(p =\> select(p.age))
@@ -52,7 +52,7 @@ therefore
 // OK in an IN clause :  
 from(aTable)(t =\> t.aField in (peopleQuery1))
 
-\]\]\>
+
 
 </script>
 
@@ -60,7 +60,7 @@ from(aTable)(t =\> t.aField in (peopleQuery1))
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // this query is not nestable (in a from clause) :  
 val nonNestablePeopleQuery1 =  
@@ -80,7 +80,7 @@ from(nonNestablePeopleQuery1)(x =\> select(x))
 // type of aField is compatible with p.age) :  
 from(t)(x =\> where(x.aField in (nonNestablePeopleQuery1)) select(x))
 
-\]\]\>
+
 
 </script>
 
@@ -89,7 +89,7 @@ from(t)(x =\> where(x.aField in (nonNestablePeopleQuery1)) select(x))
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // Not OK :  
 val q1 = people.where(p=\> p.age + 1 \> 40)
@@ -97,6 +97,6 @@ val q1 = people.where(p=\> p.age + 1 \> 40)
 // OK :  
 val q2 = people.where(p=\> p.age plus 1 gt 40)
 
-\]\]\>
+
 
 </script>

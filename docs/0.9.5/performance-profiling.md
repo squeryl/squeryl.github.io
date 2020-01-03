@@ -12,7 +12,7 @@ the an execution of the test suite.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // This will create an H2 database file named ‘db-usage-stats.h2.db’
 
@@ -41,7 +41,7 @@ top 10 queries
 localH2SinkStatisticsListener.generateStatSummary(new
 java.io.File(“./profileOfH2Tests.html”), 10)
 
-\]\]\>
+
 
 </script>
 

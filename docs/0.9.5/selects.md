@@ -12,7 +12,7 @@ is itself a Queryable\[T\] and a lazy Iterable\[T\].
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class Artist(val id: Long, val name:String) {
 
@@ -20,7 +20,7 @@ def songs =
 from(MusicDb.songs)(s =\> where(s.artistId === id) select(s))
 
 }  
-\]\]\>
+
 
 </script>
 
@@ -33,9 +33,9 @@ type determines the generic parameter of the Query\[R\]
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 def select\[R\](r: =\>R): R  
-\]\]\>
+
 
 </script>
 
@@ -47,7 +47,7 @@ generic) syntax :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 class Song(var title: String, var artistId: Long) extends KeyedEntity {
 
 import MusicDb.\_ // the schema can be imported in the scope
@@ -59,7 +59,7 @@ def artist = artists.where(a =\> a.id === artistId).single
 // KeyedEntity\[Long\] :  
 def lookupArtist = artists.lookup(artistId)  
 }  
-\]\]\>
+
 
 </script>
 
@@ -81,14 +81,14 @@ into other queries :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 def songsInPlaylistOrder =  
 from(playlistElements, songs)((ple, s) =\>  
 where(ple.playlistId = id and ple.songId = s.id)  
 select(s)  
 orderBy(ple.songNumber asc)  
 )  
-\]\]\>
+
 
 </script>
 
@@ -101,14 +101,14 @@ the from clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val songsFromThe60sInFunkAndLatinJazzPlaylist2 =  
 from(funkAndLatinJazz.songsInPlaylistOrder)(s=\>  
 where(s.id === 123)  
 select(s)  
 )  
-\]\]\>
+
 
 </script>
 
@@ -118,7 +118,7 @@ Joins can also be nested in the where clause just like in SQL :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val songsFromThe60sInFunkAndLatinJazzPlaylist =  
 from(songs)(s=\>  
 where(s.id in  
@@ -130,7 +130,7 @@ select(s)
 
 for(s \<- songsFromThe60sInFunkAndLatinJazzPlaylist)  
 println(s.title + " : " + s.year)  
-\]\]\>
+
 
 </script>
 
@@ -138,7 +138,7 @@ The SQL generated for the above statement is :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+
 Select  
 Song1.year as Song1\_year,  
 Song1.title as Song1\_title,  
@@ -169,7 +169,7 @@ PlaylistElement4.songNumber Asc
 ) q3  
 ))
 
-\]\]\>
+
 
 </script>
 
@@ -188,14 +188,14 @@ For example:
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val studentsWithAnAddress =  
 from(students)(s =\>  
 where(exists(from(addresses)((a) =\> where(s.addressId === a.id)
 select(a.id))))  
 select(s)  
 )  
-\]\]\>
+
 
 </script>
 
@@ -203,7 +203,7 @@ The SQL generated for the above statement is :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[  
+
 Select  
 Student8.name as Student8\_name,  
 Student8.age as Student8\_age,  
@@ -222,7 +222,7 @@ Address Address11
 Where  
 (Student8.addressId = Address11.id)  
 ) )  
-\]\]\>
+
 
 </script>
 
@@ -234,9 +234,9 @@ that has a ‘distinct’ select clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 from(songs)(s =\> select(&(s.title))).distinct  
-\]\]\>
+
 
 </script>
 
@@ -248,8 +248,8 @@ that has a ‘forUpdate’ locking directive :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 aTable.where(t =\> t.aField === aValue).forUpdate  
-\]\]\>
+
 
 </script>

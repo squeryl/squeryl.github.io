@@ -13,7 +13,7 @@ this is what the **&** function does :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // the \* is done on the client side :
 
@@ -26,7 +26,7 @@ select(a.id \* 1000)
 from(artists)(a =\>  
 select(&(a.id \* 1000))  
 )  
-\]\]\>
+
 
 </script>
 
@@ -37,12 +37,12 @@ A select can have more than one invocation of & :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val q: Query\[Tuple2\[Double, String\]\] =  
 from(artists)(a =\>  
 select((&(a.id \* 1000), &(a.firstName \|\| a.lastName)))  
 )  
-\]\]\>
+
 
 </script>

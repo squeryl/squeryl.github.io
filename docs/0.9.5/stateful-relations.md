@@ -17,7 +17,7 @@ invoke instead of **left** and **right** :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class Course(val subjectId: Long) extends SchoolDb2Object {
 
@@ -46,7 +46,7 @@ lazy val courses: OneToMany\[Course\] =
 SchoolDb.subjectToCourses.leftStateful(this)  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -60,7 +60,7 @@ relation is in fact a wrapper over a stateless one, with caching.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class StatefulOneToMany\[M\](val relation: OneToMany\[M\]) extends
 Iterable\[M\] {
@@ -84,7 +84,7 @@ def assign(o: O): Unit
 def delete: Boolean  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -95,7 +95,7 @@ apparent :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class StatefulManyToMany\[O \<: KeyedEntity*\],A \<:
 KeyedEntity\[*\](val relation: ManyToMany\[O,A\]) extends Iterable\[O\]
@@ -109,6 +109,6 @@ def dissociateAll: Int
 def associations: Iterable\[A\]  
 }
 
-\]\]\>
+
 
 </script>

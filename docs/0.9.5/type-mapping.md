@@ -40,7 +40,7 @@ Here are some examples :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val q1 =  
 from(aTable)(t =\> select( &(t.aLong \* t.aFloat) )) : Query\[Double\]
@@ -57,7 +57,7 @@ from(aTable)(t =\>
 select( &(t.aString \|\| t.aLong \|\| " " \|\| a.IntOption) )) :
 Query\[Option\[String\]\]
 
-\]\]\>
+
 
 </script>
 

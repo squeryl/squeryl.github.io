@@ -26,7 +26,7 @@ When that is not possible, sending the AST of the query
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val q =  
 from(artists, songs)((a,s) =\>  
 where(a.id === s.artistId)  
@@ -36,7 +36,7 @@ compute(count)
 
 println(q.dumpAst)
 
-\]\]\>
+
 
 </script>
 

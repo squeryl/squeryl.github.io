@@ -13,7 +13,7 @@ that are grouped in a org.squeryl.Schema singleton.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 import org.squeryl.PrimitiveTypeMode.\_  
 import org.squeryl.Schema  
 import org.squeryl.annotations.Column  
@@ -57,7 +57,7 @@ val books = table\[Book\]
 val borrowals = table\[Borrowal\]  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -69,7 +69,7 @@ influence the DDL generation with the following declarations :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 object Library extends Schema {  
 …  
@@ -90,7 +90,7 @@ columns(s.firstName, s.lastName) are(indexed)
 ))  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -118,7 +118,7 @@ Use Schema.printDdl to print your schema :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 def printDdl: Unit = printDdl(println(\_))
 
@@ -126,7 +126,7 @@ def printDdl(pw: PrintWriter): Unit = printDdl(pw.println(\_))
 
 def printDdl(pw: String =\> Unit): Unit = {…}
 
-\]\]\>
+
 
 </script>
 
@@ -196,7 +196,7 @@ Enumerations are persisted by ‘int’ columns
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 object Tempo extends Enumeration {  
 type Tempo = Value  
@@ -209,7 +209,7 @@ class Song(name: String, tempo: Tempo) {
 def this() = this(“”,Tempo.Largo)  
 }
 
-\]\]\>
+
 
 </script>
 
@@ -234,7 +234,7 @@ in the scope where database objects and queries are defined :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 import org.squeryl.PrimitiveTypeMode.\_
 
@@ -245,7 +245,7 @@ val filePath: Option\[String\],
 val year: Int)
 
 from(songs)(s =\> where(s.title like “funk”) select(s))  
-\]\]\>
+
 
 </script>
 
@@ -266,7 +266,7 @@ LogicalBoolean which is what the where clause takes :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 from(songs)(s =\>  
 where(s.year.\~ \> 1965)  
 select(s)  
@@ -276,7 +276,7 @@ from(songs)(s =\>
 where(s.year gt 1965)  
 select(s)  
 )  
-\]\]\>
+
 
 </script>
 
@@ -284,7 +284,7 @@ It is also needed in the following case :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 from(songs)(s =\>  
 where(s.year.\~ + 10 = 1965)
       select(s)
@@ -294,7 +294,7 @@ where(s.year.\~ + 10 = 1965)
       where(s.year plus 10 = 1965)  
 select(s)  
 )  
-\]\]\>
+
 
 </script>
 
@@ -317,7 +317,7 @@ into the scope where statements are defined.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 import org.squeryl.customtypes.CustomTypesMode.\_  
 import org.squeryl.customtypes.\_
@@ -362,6 +362,6 @@ WeightInKilograms)
 val heavyWeights = from(patients)(p =\> where(p.weight \> 250)
 select(p))
 
-\]\]\>
+
 
 </script>

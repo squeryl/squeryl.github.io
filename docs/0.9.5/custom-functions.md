@@ -11,7 +11,7 @@ You can define :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class SHA1(e: StringExpression\[String\], m:OutMapper\[String\])  
 extends FunctionNode\[String\](“sha1”, Some(m), Seq(e)) with
@@ -20,7 +20,7 @@ StringExpression\[String\]
 def sha1(e: StringExpression\[String\])(implicit m:OutMapper\[String\])
 = new SHA1(e,m)
 
-\]\]\>
+
 
 </script>
 
@@ -28,7 +28,7 @@ Then you can use the sha1 function in expressions :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 def sha1Of(id: Long) =  
 from(aTable)(u=\> where(u.id === id) select(&(sha1(u.aStringField)))
@@ -37,7 +37,7 @@ def isSha1Equal(id: Long, s: String) =
 from(aTable)(u=\> where(u.id = id and sha1(u.aStringField) = s)).Count
 == 1
 
-\]\]\>
+
 
 </script>
 
@@ -46,14 +46,14 @@ following Squeryl types (defined in org.squeryl.dsl) :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 trait NumericalExpression\[A\]  
 trait StringExpression\[B\]  
 trait DateExpression\[C\]  
 trait BooleanExpression\[D\]
 
-\]\]\>
+
 
 </script>
 
@@ -72,7 +72,7 @@ PrimitiveTypeMode, CustomTypeMode and RecordTypeMode
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 // For Squeryl versions before 0.9.5-Beta, OutMappers need to be  
 // created and given as argument to FunctionNode
@@ -100,6 +100,6 @@ Some(v)
 def sample = Some(“”)  
 }
 
-\]\]\>
+
 
 </script>

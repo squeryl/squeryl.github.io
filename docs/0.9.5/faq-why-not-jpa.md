@@ -12,7 +12,7 @@ Can you spot the typo in this JPA query ?
 
 <script type="syntaxhighlighter" class="brush: java">
 
-\<!\[CDATA\[  
+
 //JPA :  
 Query query =  
 em.createQuery(  
@@ -23,7 +23,7 @@ em.createQuery(
 );
 
 query.setParameter(“idOfSubject”, idOfSubject);  
-\]\]\>
+
 
 </script>
 
@@ -41,7 +41,7 @@ Can you count the number of database calls resulting from this JPA query
 
 <script type="syntaxhighlighter" class="brush: java">
 
-\<!\[CDATA\[
+
 
 Iterable<Book> books = bookEntityManager.findBySubjectId(idOfSubject);  
 while(books.hasNext()) {  
@@ -51,7 +51,7 @@ Publisher p = b.getPublisher();
 System.out.println(b.getTitle() + " by " + a.getFullName() + " published
 by " + p.getName());  
 }  
-\]\]\>
+
 
 </script>
 
@@ -67,7 +67,7 @@ the second :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 val q =  
 from(authors, books, publisher)((a,b,p) =\>  
 where(b.subjectId = idOfSubject and
@@ -78,7 +78,7 @@ select((a,b,p))
 for(r \<- q)  
 println(r.\_2.title + " by " + r.\_1.fullName + " published by " +
 p.\_3.name)  
-\]\]\>
+
 
 </script>
 

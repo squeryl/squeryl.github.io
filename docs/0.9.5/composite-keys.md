@@ -16,14 +16,14 @@ KeyedEntity\[CompositeKey2\[Long,Long\]\]
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class CourseAssignment(val courseId: Long, val professorId: Long)
 extends KeyedEntity\[CompositeKey2\[Long,Long\]\] {
 
 def id = compositeKey(courseId, professorId)  
 }  
-\]\]\>
+
 
 </script>
 
@@ -59,7 +59,7 @@ relations (see : [issue
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val aCourseAssignment = courseAssignments.where(…).single
 
@@ -71,12 +71,12 @@ courseAssignments.where(\_.id ===(113243L, 26543546L))
 
 println(q.statement)
 
-\]\]\>
+
 
 </script>
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[
+
 
 Select  
 CourseAssignment1.professorId as CourseAssignment1\_professorId,  
@@ -87,12 +87,12 @@ Where
 ((CourseAssignment1.courseId = 113243) and
 (CourseAssignment1.professorId = 26543546))
 
-\]\]\>
+
 
 </script>
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 val aCourseAssignment = courseAssignments.where(…).single
 
@@ -102,6 +102,6 @@ courseAssignments.where(
       \_.id.professorId = aCourseAssignment.professorId  
 )
 
-\]\]\>
+
 
 </script>

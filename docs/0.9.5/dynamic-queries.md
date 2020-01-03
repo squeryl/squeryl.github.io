@@ -26,7 +26,7 @@ Example :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 def searchForBooks(authorLastName: Option\[String\], bookTitle: String)
 =  
@@ -41,7 +41,7 @@ Loup est un loup”).toList
 
 val result2:List\[(Book,Option(Author))\] = searchForBooks(“Tolstoi”,
 “War and Peace”).toList  
-\]\]\>
+
 
 </script>
 
@@ -52,7 +52,7 @@ table disappears from the generated SQL base on the input of
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-\<!\[CDATA\[
+
 
 — first query : searchForBooks(None, “Un Loup est un loup”).toList
 
@@ -72,7 +72,7 @@ where
 a.lastName like ? and — “Tolstoi”  
 b.title like ? and — “War and Peace”  
 a.id = b.authorId  
-\]\]\>
+
 
 </script>
 

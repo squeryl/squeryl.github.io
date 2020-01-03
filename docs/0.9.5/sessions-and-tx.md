@@ -12,7 +12,7 @@ transactions can be invoked :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 import org.squeryl.SessionFactory
 
 Class.forName(“org.postgresql.Driver”);
@@ -21,7 +21,7 @@ SessionFactory.concreteFactory = Some(()=\>
 Session.create(  
 java.sql.DriverManager.getConnection(“…”),  
 new PostgreSqlAdapter))  
-\]\]\>
+
 
 </script>
 
@@ -31,7 +31,7 @@ become available :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[  
+
 import org.squeryl.PrimitiveTypeMode.\_
 
 //Squeryl database interaction must occur in a transaction block :  
@@ -46,7 +46,7 @@ authors.where(a=\> a.lastName === “Pouchkine”)
 //when in a transaction, the current session can be obtained with :  
 val s = Session.currentSession  
 }  
-\]\]\>
+
 
 </script>
 
@@ -83,7 +83,7 @@ code (before any Squeryl code gets to execute).
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 SessionFactorye.externalTransactionManagementAdapter = Some(  
 () =\> new Session(  
@@ -92,7 +92,7 @@ new OracleAdapter
 )  
 )
 
-\]\]\>
+
 
 </script>
 
@@ -103,13 +103,13 @@ Given an org.squeryl.Session, Squeryl statements can be issued with the
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 using(squerylSession) {  
 // your Squeryl code here…  
 }
 
-\]\]\>
+
 
 </script>
 

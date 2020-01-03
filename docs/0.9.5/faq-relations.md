@@ -15,7 +15,7 @@ with more reuse. Consider for example a “one to many” relation :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 class Song(val id, val title: String, val artistId: Long, val year) {
 
@@ -26,7 +26,7 @@ class Artist(val id: Long, val name:String) {
 
 def songs = from(songsTable).where(s =\> s.artistId === id)  
 }  
-\]\]\>
+
 
 </script>
 
@@ -51,11 +51,11 @@ Here’s how it happens, suppose you execute the following :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-\<!\[CDATA\[
+
 
 for(so \<- jamesBrown.songs.where(s =\> s.year \<= 1965))  
 println(so.title)  
-\]\]\>
+
 
 </script>
 
