@@ -18,13 +18,12 @@ fetched with).
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
-
-class Book(val id: Long,  
-var title: String,  
-var authorId: Long) extends KeyedEntity\[Long\] with Optimistic
-
-
+class Book(val id: Long,
+  var title: String,
+  var authorId: Long) extends KeyedEntity[Long] with Optimistic
+]]>
 
 </script>
 
@@ -34,15 +33,12 @@ KeyedEntity\[\] in order extend Optimistic.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
-trait Optimistic {  
-self: KeyedEntity\[\_\] =\>
-
-protected val occVersionNumber = 0  
+<![CDATA[
+trait Optimistic {
+  self: KeyedEntity[_] =>
+    protected val occVersionNumber = 0
 }
-
-
+]]>
 
 </script>
 

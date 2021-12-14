@@ -15,16 +15,11 @@ Consider the following example where CourseAssignment is a
 KeyedEntity\[CompositeKey2\[Long,Long\]\]
 
 <script type="syntaxhighlighter" class="brush: scala">
-
-
-
-class CourseAssignment(val courseId: Long, val professorId: Long)
-extends KeyedEntity\[CompositeKey2\[Long,Long\]\] {
-
-def id = compositeKey(courseId, professorId)  
-}  
-
-
+<![CDATA[
+class CourseAssignment(val courseId: Long, val professorId: Long) extends KeyedEntity[CompositeKey2[Long,Long]] {
+  def id = compositeKey(courseId, professorId)
+}
+]]>
 </script>
 
 CourseAssignment.id is a unique identifier for a CourseAssignment. In
@@ -58,50 +53,36 @@ relations (see : [issue
 25](http://www.assembla.com/spaces/squeryl/tickets/25))
 
 <script type="syntaxhighlighter" class="brush: scala">
-
-
-
+<![CDATA[
 val aCourseAssignment = courseAssignments.where(…).single
 
-val q1 =  
-courseAssignments.where(\_.id === aCourseAssignment.id)
+val q1 = courseAssignments.where(_.id === aCourseAssignment.id)
 
-val q2 =  
-courseAssignments.where(\_.id ===(113243L, 26543546L))
+val q2 = courseAssignments.where(_.id ===(113243L, 26543546L))
 
 println(q.statement)
-
-
-
+]]>
 </script>
+
 <script type="syntaxhighlighter" class="brush: sql">
-
-
-
-Select  
-CourseAssignment1.professorId as CourseAssignment1\_professorId,  
-CourseAssignment1.courseId as CourseAssignment1\_courseId  
-From  
-CourseAssignment CourseAssignment1  
-Where  
+<![CDATA[
+Select
+CourseAssignment1.professorId as CourseAssignment1_professorId,
+CourseAssignment1.courseId as CourseAssignment1_courseId
+From
+CourseAssignment CourseAssignment1
+Where
 ((CourseAssignment1.courseId = 113243) and
 (CourseAssignment1.professorId = 26543546))
-
-
-
+]]>
 </script>
 <script type="syntaxhighlighter" class="brush: scala">
-
-
-
+<![CDATA[
 val aCourseAssignment = courseAssignments.where(…).single
 
-val q1 =  
-courseAssignments.where(  
-\_.id.courseId = aCourseAssignment.courseId and
-      \_.id.professorId = aCourseAssignment.professorId  
-)
-
-
-
+val q1 =
+  courseAssignments.where(
+    _.id.courseId = aCourseAssignment.courseId and
+      _.id.professorId = aCourseAssignment.professorId)
+]]>
 </script>

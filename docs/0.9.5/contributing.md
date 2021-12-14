@@ -25,19 +25,15 @@ When that is not possible, sending the AST of the query
 (with Query\[T\].dumpAst) is also helpful :
 
 <script type="syntaxhighlighter" class="brush: scala">
-
-
-val q =  
-from(artists, songs)((a,s) =\>  
-where(a.id === s.artistId)  
-groupBy(a.id)  
-compute(count)  
-)
+<![CDATA[
+val q =
+  from(artists, songs)((a,s) =>
+    where(a.id === s.artistId)
+    groupBy(a.id)
+    compute(count))
 
 println(q.dumpAst)
-
-
-
+]]>
 </script>
 
 Submitting Ideas and Issues

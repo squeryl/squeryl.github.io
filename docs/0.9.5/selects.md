@@ -12,15 +12,13 @@ is itself a Queryable\[T\] and a lazy Iterable\[T\].
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
+<![CDATA[
 class Artist(val id: Long, val name:String) {
 
-def songs =  
-from(MusicDb.songs)(s =\> where(s.artistId === id) select(s))
-
-}  
-
+  def songs =  
+  from(MusicDb.songs)(s => where(s.artistId === id) select(s))
+}
+]]>
 
 </script>
 
@@ -33,9 +31,9 @@ type determines the generic parameter of the Query\[R\]
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-def select\[R\](r: =\>R): R  
-
+<![CDATA[
+def select[R](r: =>R): R
+]]>
 
 </script>
 
@@ -43,23 +41,23 @@ The select expression will be evaluated for every row returned by the
 query.
 
 It is also possible to select with alternative (shorter but less
-generic) syntax :
+generic) syntax:
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
+<![CDATA[
 class Song(var title: String, var artistId: Long) extends KeyedEntity {
 
-import MusicDb.\_ // the schema can be imported in the scope
+  import MusicDb._ // the schema can be imported in the scope
 
-// A shorter syntax for single table queries :  
-def artist = artists.where(a =\> a.id === artistId).single
+  // A shorter syntax for single table queries:
+  def artist = artists.where(a => a.id === artistId).single
 
-// lookup by key is available because Artist extends  
-// KeyedEntity\[Long\] :  
-def lookupArtist = artists.lookup(artistId)  
-}  
-
+  // lookup by key is available because Artist extends
+  // KeyedEntity[Long]:
+  def lookupArtist = artists.lookup(artistId)
+}
+]]>
 
 </script>
 
@@ -81,14 +79,13 @@ into other queries :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-def songsInPlaylistOrder =  
-from(playlistElements, songs)((ple, s) =\>  
-where(ple.playlistId = id and ple.songId = s.id)  
-select(s)  
-orderBy(ple.songNumber asc)  
-)  
-
+<![CDATA[
+def songsInPlaylistOrder =
+  from(playlistElements, songs)((ple, s) =>
+  where(ple.playlistId = id and ple.songId = s.id)
+  select(s)
+  orderBy(ple.songNumber asc))
+]]>
 
 </script>
 
@@ -101,14 +98,12 @@ the from clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
-val songsFromThe60sInFunkAndLatinJazzPlaylist2 =  
-from(funkAndLatinJazz.songsInPlaylistOrder)(s=\>  
-where(s.id === 123)  
-select(s)  
-)  
-
+<![CDATA[
+val songsFromThe60sInFunkAndLatinJazzPlaylist2 =
+  from(funkAndLatinJazz.songsInPlaylistOrder)(s=>
+  where(s.id === 123)
+  select(s))
+]]>
 
 </script>
 
@@ -118,19 +113,17 @@ Joins can also be nested in the where clause just like in SQL :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+val songsFromThe60sInFunkAndLatinJazzPlaylist =
+  from(songs)(s=>
+    where(s.id in
+      from(funkAndLatinJazz.songsInPlaylistOrder)
+      (s2 => select(s2.id)))
+    select(s))
 
-val songsFromThe60sInFunkAndLatinJazzPlaylist =  
-from(songs)(s=\>  
-where(s.id in  
-from(funkAndLatinJazz.songsInPlaylistOrder)  
-(s2 =\> select(s2.id))  
-)  
-select(s)  
-)
-
-for(s \<- songsFromThe60sInFunkAndLatinJazzPlaylist)  
-println(s.title + " : " + s.year)  
-
+for(s <- songsFromThe60sInFunkAndLatinJazzPlaylist)
+  println(s.title + " : " + s.year)
+]]>
 
 </script>
 
@@ -138,38 +131,34 @@ The SQL generated for the above statement is :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-
-Select  
-Song1.year as Song1\_year,  
-Song1.title as Song1\_title,  
-Song1.filePath as Song1\_filePath,  
-Song1.artistId as Song1\_artistId,  
-Song1.id as Song1\_id  
-From  
-Song Song1  
-Where  
-(Song1.id in  
-(Select  
-q3.Song5\_id as q3\_Song5\_id  
-From  
-(Select  
-Song5.year as Song5\_year,  
-Song5.title as Song5\_title,  
-Song5.filePath as Song5\_filePath,  
-Song5.artistId as Song5\_artistId,  
-Song5.id as Song5\_id  
-From  
-PlaylistElement PlaylistElement4,  
-Song Song5  
-Where  
-((PlaylistElement4.playlistId = ?) and (PlaylistElement4.songId =
-Song5.id))  
-Order By  
-PlaylistElement4.songNumber Asc  
-) q3  
-))
-
-
+<![CDATA[
+Select
+  Song1.year as Song1_year,
+  Song1.title as Song1_title,
+  Song1.filePath as Song1_filePath,
+  Song1.artistId as Song1_artistId,
+  Song1.id as Song1_id
+From
+  Song Song1
+Where
+  (Song1.id in
+    (Select
+    q3.Song5_id as q3_Song5_id
+From
+  (Select
+    Song5.year as Song5_year,
+    Song5.title as Song5_title,
+    Song5.filePath as Song5_filePath,
+    Song5.artistId as Song5_artistId,
+    Song5.id as Song5_id
+  From
+    PlaylistElement PlaylistElement4,
+    Song Song5
+  Where
+    ((PlaylistElement4.playlistId = ?) and (PlaylistElement4.songId = Song5.id))
+    Order By
+      PlaylistElement4.songNumber Asc) q3))
+]]>
 
 </script>
 
@@ -188,14 +177,13 @@ For example:
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-val studentsWithAnAddress =  
-from(students)(s =\>  
-where(exists(from(addresses)((a) =\> where(s.addressId === a.id)
-select(a.id))))  
-select(s)  
-)  
-
+<![CDATA[
+val studentsWithAnAddress =
+  from(students)(s =>
+    where(exists(from(addresses)((a) => where(s.addressId === a.id)
+    select(a.id))))
+    select(s))
+]]>
 
 </script>
 
@@ -203,26 +191,25 @@ The SQL generated for the above statement is :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
-
-Select  
-Student8.name as Student8\_name,  
-Student8.age as Student8\_age,  
-Student8.isMultilingual as Student8\_isMultilingual,  
-Student8.lastName as Student8\_lastName,  
-Student8.id as Student8\_id,  
-Student8.addressId as Student8\_addressId,  
-Student8.gender as Student8\_gender  
+<![CDATA[
+Select
+  Student8.name as Student8_name,  
+  Student8.age as Student8_age,  
+  Student8.isMultilingual as Student8_isMultilingual,  
+  Student8.lastName as Student8_lastName,  
+  Student8.id as Student8_id,  
+  Student8.addressId as Student8_addressId,  
+  Student8.gender as Student8_gender  
 From  
-Student Student8  
+  Student Student8  
 Where  
-(exists(Select  
-Address11.id as Address11\_id  
-From  
-Address Address11  
-Where  
-(Student8.addressId = Address11.id)  
-) )  
-
+  (exists(Select
+      Address11.id as Address11_id  
+  From  
+    Address Address11  
+  Where  
+    (Student8.addressId = Address11.id)))
+]]>
 
 </script>
 
@@ -234,9 +221,9 @@ that has a ‘distinct’ select clause :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-from(songs)(s =\> select(&(s.title))).distinct  
-
+<![CDATA[
+from(songs)(s => select(&(s.title))).distinct  
+]].
 
 </script>
 
@@ -248,8 +235,8 @@ that has a ‘forUpdate’ locking directive :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-aTable.where(t =\> t.aField === aValue).forUpdate  
-
+<![CDATA[
+aTable.where(t => t.aField === aValue).forUpdate
+]]>
 
 </script>

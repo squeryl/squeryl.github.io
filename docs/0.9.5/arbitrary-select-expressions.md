@@ -12,22 +12,13 @@ Sometimes the expressions needs to be evaluated on the database side,
 this is what the **&** function does :
 
 <script type="syntaxhighlighter" class="brush: scala">
+<![CDATA[
+// the * is done on the client side:
+from(artists)(a => select(a.id * 1000))
 
-
-
-// the \* is done on the client side :
-
-from(artists)(a =\>  
-select(a.id \* 1000)  
-)
-
-// in this case it is computed by the database :
-
-from(artists)(a =\>  
-select(&(a.id \* 1000))  
-)  
-
-
+// in this case it is computed by the database:
+from(artists)(a => select(&(a.id * 1000)))
+]]>
 </script>
 
 -   Note that the return type are equivalent in both cases, i.e. both
@@ -36,13 +27,10 @@ select(&(a.id \* 1000))
 A select can have more than one invocation of & :
 
 <script type="syntaxhighlighter" class="brush: scala">
+<![CDATA[
 
+val q: Query[Tuple2[Double, String]] = from(artists)(a => 
+  select((&(a.id * 1000), &(a.firstName || a.lastName))))
 
-
-val q: Query\[Tuple2\[Double, String\]\] =  
-from(artists)(a =\>  
-select((&(a.id \* 1000), &(a.firstName \|\| a.lastName)))  
-)  
-
-
+]]>
 </script>

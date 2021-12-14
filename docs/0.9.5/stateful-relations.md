@@ -17,36 +17,26 @@ invoke instead of **left** and **right** :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
+<![CDATA[
 class Course(val subjectId: Long) extends SchoolDb2Object {
 
-//students is a ManyToMany\[Student,CourseSubscription\], it extends
-Query\[Students\]  
-lazy val students = SchoolDb2.courseSubscriptions.leftStateful(this)  
+  //students is a ManyToMany[Student,CourseSubscription], it extends Query[Students]
+  lazy val students = SchoolDb2.courseSubscriptions.leftStateful(this)
 }
 
-class Student(val firstName: String, val lastName: String) extends
-SchoolDb2Object {
-
-//courses is a ManyToMany\[Course,CourseSubscription\], it extends
-Query\[Course\]  
-lazy val courses = SchoolDb2.courseSubscriptions.rightStateful(this)  
+class Student(val firstName: String, val lastName: String) extends SchoolDb2Object {
+  //courses is a ManyToMany[Course,CourseSubscription], it extends Query[Course]
+  lazy val courses = SchoolDb2.courseSubscriptions.rightStateful(this)
 }
 
 class Course(val subjectId: Long) extends SchoolDb2Object {
-
-lazy val subject: ManyToOne\[Subject\] =
-SchoolDb.subjectToCourses.rightStateful(this)  
+  lazy val subject: ManyToOne[Subject] = SchoolDb.subjectToCourses.rightStateful(this)
 }
 
 class Subject(val name: String) extends SchoolDb2Object {
-
-lazy val courses: OneToMany\[Course\] =
-SchoolDb.subjectToCourses.leftStateful(this)  
+  lazy val courses: OneToMany[Course] = SchoolDb.subjectToCourses.leftStateful(this)
 }
-
-
+]]>
 
 </script>
 
@@ -60,31 +50,22 @@ relation is in fact a wrapper over a stateless one, with caching.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+class StatefulOneToMany[M](val relation: OneToMany[M]) extends Iterable[M] {
 
-
-class StatefulOneToMany\[M\](val relation: OneToMany\[M\]) extends
-Iterable\[M\] {
-
-def refresh: Unit
-
-def associate(m: M):Unit
-
-def deleteAll: Int  
+  def refresh: Unit
+  def associate(m: M):Unit
+  def deleteAll: Int
 }
 
-class StatefulManyToOne\[O \<: KeyedEntity\[\_\]\](val relation:
-ManyToOne\[O\]) {
+class StatefulManyToOne[O <: KeyedEntity[_]](val relation: ManyToOne[O]) {
 
-def refresh: Unit
-
-def one: Option\[O\]
-
-def assign(o: O): Unit
-
-def delete: Boolean  
+  def refresh: Unit
+  def one: Option[O]
+  def assign(o: O): Unit
+  def delete: Boolean
 }
-
-
+]]>
 
 </script>
 
@@ -95,20 +76,16 @@ apparent :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+class StatefulManyToMany[O <: KeyedEntity*],A <: KeyedEntity[*](val relation: ManyToMany[O,A]) extends Iterable[O] {
 
-
-class StatefulManyToMany\[O \<: KeyedEntity*\],A \<:
-KeyedEntity\[*\](val relation: ManyToMany\[O,A\]) extends Iterable\[O\]
-{
-
-def refresh: Unit  
-def associate(o: O, a: A)  
-def associate(o: O): A  
-def dissociate(o: O): Boolean  
-def dissociateAll: Int  
-def associations: Iterable\[A\]  
+  def refresh: Unit
+  def associate(o: O, a: A)
+  def associate(o: O): A
+  def dissociate(o: O): Boolean
+  def dissociateAll: Int
+  def associations: Iterable[A]
 }
-
-
+]]>
 
 </script>

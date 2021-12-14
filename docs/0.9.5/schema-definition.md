@@ -13,51 +13,46 @@ that are grouped in a org.squeryl.Schema singleton.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-import org.squeryl.PrimitiveTypeMode.\_  
-import org.squeryl.Schema  
-import org.squeryl.annotations.Column  
-import java.util.Date  
+<![CDATA[
+import org.squeryl.PrimitiveTypeMode._
+import org.squeryl.Schema
+import org.squeryl.annotations.Column
+import java.util.Date
 import java.sql.Timestamp
 
-class Author(val id: Long,  
-val firstName: String,  
-val lastName: String,  
-val email: Option\[String\]) {  
-def this() = this(0,“”,“”,Some(“”))  
+class Author(val id: Long,
+  val firstName: String,
+  val lastName: String,
+  val email: Option[String]) {
+    def this() = this(0,“”,“”,Some(“”))
+  }
+
+  // fields can be mutable or immutable
+  class Book(val id: Long,
+      var title: String,
+      @Column(“AUTHOR_ID”) // the default ‘exact match’ policy can be overriden
+      var authorId: Long,
+      var coAuthorId: Option[Long]) {
+
+  def this() = this(0,“”,0,Some(0L))
 }
 
-// fields can be mutable or immutable
-
-class Book(val id: Long,  
-var title: String,  
-@Column(“AUTHOR\_ID”) // the default ‘exact match’ policy can be
-overriden  
-var authorId: Long,  
-var coAuthorId: Option\[Long\]) {
-
-def this() = this(0,“”,0,Some(0L))  
-}
-
-class Borrowal(val id: Long,  
-val bookId: Long,  
-val borrowerAccountId: Long,  
-val scheduledToReturnOn: Date,  
-val returnedOn: Option\[Timestamp\],  
-val numberOfPhonecallsForNonReturn: Int)
+class Borrowal(val id: Long,
+  val bookId: Long,
+  val borrowerAccountId: Long,
+  val scheduledToReturnOn: Date,
+  val returnedOn: Option[Timestamp],
+  val numberOfPhonecallsForNonReturn: Int)
 
 object Library extends Schema {
 
-//When the table name doesn’t match the class name, it is specified here
-:  
-val authors = table\[Author\](“AUTHORS”)
+  //When the table name doesn’t match the class name, it is specified here:  
+  val authors = table[Author](“AUTHORS”)
 
-val books = table\[Book\]
-
-val borrowals = table\[Borrowal\]  
+  val books = table[Book]
+  val borrowals = table[Borrowal]
 }
-
-
+]]>
 
 </script>
 
@@ -69,28 +64,23 @@ influence the DDL generation with the following declarations :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
+object Library extends Schema {
+  …
+  …
+  on(borrowals)(b => declare(
+    b.numberOfPhonecallsForNonReturn defaultsTo(0),
+    b.borrowerAccountId is(indexed),
+    columns(b.scheduledToReturnOn, b.borrowerAccountId) are(indexed)))
 
-object Library extends Schema {  
-…  
-…  
-on(borrowals)(b =\> declare(  
-b.numberOfPhonecallsForNonReturn defaultsTo(0),  
-b.borrowerAccountId is(indexed),  
-columns(b.scheduledToReturnOn, b.borrowerAccountId) are(indexed)  
-))
-
-on(authors)(s =\> declare(  
-s.email is(unique,indexed(“idxEmailAddresses”)), //indexes can be named
-explicitely  
-s.firstName is(indexed),  
-s.lastName is(indexed, dbType(“varchar(255)”)), // the default column
-type can be overriden  
-columns(s.firstName, s.lastName) are(indexed)  
-))  
+  on(authors)(s => declare(
+    s.email is(unique,indexed(“idxEmailAddresses”)), //indexes can be named explicitely
+    s.firstName is(indexed),
+    s.lastName is(indexed, dbType(“varchar(255)”)), // the default column type can be overriden
+    columns(s.firstName, s.lastName) are(indexed)))
 }
-
-
+]]>
 
 </script>
 
@@ -118,15 +108,13 @@ Use Schema.printDdl to print your schema :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+def printDdl: Unit = printDdl(println(_))
 
+def printDdl(pw: PrintWriter): Unit = printDdl(pw.println(_))
 
-def printDdl: Unit = printDdl(println(\_))
-
-def printDdl(pw: PrintWriter): Unit = printDdl(pw.println(\_))
-
-def printDdl(pw: String =\> Unit): Unit = {…}
-
-
+def printDdl(pw: String => Unit): Unit = {…}
+]]>
 
 </script>
 
@@ -196,20 +184,18 @@ Enumerations are persisted by ‘int’ columns
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
-object Tempo extends Enumeration {  
-type Tempo = Value  
-val Largo = Value(1, “Largo”)  
-val Allegro = Value(2, “Allegro”)  
-val Presto = Value(3, “Presto”)  
+<![CDATA[
+object Tempo extends Enumeration {
+  type Tempo = Value
+  val Largo = Value(1, “Largo”)
+  val Allegro = Value(2, “Allegro”)
+  val Presto = Value(3, “Presto”)
 }
 
-class Song(name: String, tempo: Tempo) {  
-def this() = this(“”,Tempo.Largo)  
+class Song(name: String, tempo: Tempo) {
+  def this() = this(“”,Tempo.Largo)
 }
-
-
+]]>
 
 </script>
 
@@ -234,18 +220,17 @@ in the scope where database objects and queries are defined :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+import org.squeryl.PrimitiveTypeMode._
 
+class Song(val id: Long,
+  val title: String,
+  val artistId: Long,
+  val filePath: Option[String],
+  val year: Int)
 
-import org.squeryl.PrimitiveTypeMode.\_
-
-class Song(val id: Long,  
-val title: String,  
-val artistId: Long,  
-val filePath: Option\[String\],  
-val year: Int)
-
-from(songs)(s =\> where(s.title like “funk”) select(s))  
-
+from(songs)(s => where(s.title like “funk”) select(s))
+]]>
 
 </script>
 
@@ -266,17 +251,16 @@ LogicalBoolean which is what the where clause takes :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+from(songs)(s =>
+  where(s.year.~ > 1965)
+select(s))
 
-from(songs)(s =\>  
-where(s.year.\~ \> 1965)  
-select(s)  
-)  
-// or use ‘gt’ instead of \> :  
-from(songs)(s =\>  
-where(s.year gt 1965)  
-select(s)  
-)  
-
+// or use ‘gt’ instead of >:
+from(songs)(s =>
+  where(s.year gt 1965)
+  select(s))
+]]>
 
 </script>
 
@@ -284,17 +268,15 @@ It is also needed in the following case :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-from(songs)(s =\>  
-where(s.year.\~ + 10 = 1965)
-      select(s)
-    )
-    // or use 'plus'
-    from(songs)(s =\>
-      where(s.year plus 10 = 1965)  
-select(s)  
-)  
-
+<![CDATA[
+from(songs)(s => 
+  where(s.year.~ + 10 = 1965)
+  select(s))
+// or use 'plus'
+from(songs)(s =>
+  where(s.year plus 10 = 1965)
+  select(s)) 
+]]>
 
 </script>
 
@@ -317,51 +299,42 @@ into the scope where statements are defined.
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+import org.squeryl.customtypes.CustomTypesMode._
+import org.squeryl.customtypes._
 
+/* An example of trait that can be mixed into CustomType,
+ * to add meta data and validation
+ */
+trait Domain[A] {
+  self: CustomType =>
 
-import org.squeryl.customtypes.CustomTypesMode.\_  
-import org.squeryl.customtypes.\_
+  def label: String
+  def validate(a: A): Unit
+  def value: A
 
-/  
-\* An example of trait that can be mixed into CustomType,  
-\* to add meta data and validation  
-\*/  
-trait Domain\[A\] {  
-self: CustomType =\>
-
-def label: String  
-def validate(a: A): Unit  
-def value: A
-
-validate(value)  
+  validate(value)
 }
 
-class Age(v: Int) extends IntField(v) with Domain\[Int\] {  
-def validate(a: Int) = assert(a \> 0, “age must be positive, got ” +
-a)  
-def label = “age”  
+class Age(v: Int) extends IntField(v) with Domain[Int] {
+  def validate(a: Int) = assert(a > 0, “age must be positive, got ” + a)
+  def label = “age”
 }
 
-class FirstName(v: String) extends StringField(v) with Domain\[String\]
-{  
-def validate(s: String) = assert(s.length \<= 50, “first name is waaaay
-to long : ” + s)  
-def label = “first name”  
+class FirstName(v: String) extends StringField(v) with Domain[String] {
+  def validate(s: String) = assert(s.length \<= 50, “first name is waaaay to long : ” + s)
+  def label = “first name”
 }
 
-class WeightInKilograms(v: Double) extends DoubleField(v) with
-Domain\[Double\] {  
-def validate(d:Double) = assert(d \> 0, “weight must be positive, got ”
-+ d)  
-def label = “weight (in kilograms)”  
+class WeightInKilograms(v: Double) extends DoubleField(v) with Domain[Double] {
+  def validate(d:Double) = assert(d > 0, “weight must be positive, got ” + d)
+  def label = “weight (in kilograms)”
 }
 
-class Patient(val firstName: FirstName, val age: Age, val weight:
-WeightInKilograms)
+class Patient(val firstName: FirstName, val age: Age, val weight: WeightInKilograms)
 
-val heavyWeights = from(patients)(p =\> where(p.weight \> 250)
-select(p))
-
-
+val heavyWeights = from(patients)(p => where(p.weight > 250)
+  select(p))
+]]>
 
 </script>

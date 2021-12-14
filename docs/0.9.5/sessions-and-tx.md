@@ -12,16 +12,16 @@ transactions can be invoked :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
+<![CDATA[
 import org.squeryl.SessionFactory
 
 Class.forName(“org.postgresql.Driver”);
 
-SessionFactory.concreteFactory = Some(()=\>  
-Session.create(  
-java.sql.DriverManager.getConnection(“…”),  
-new PostgreSqlAdapter))  
-
+SessionFactory.concreteFactory = Some(()=>
+  Session.create(
+    java.sql.DriverManager.getConnection(“…”),
+    new PostgreSqlAdapter))
+]]>
 
 </script>
 
@@ -31,29 +31,27 @@ become available :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+import org.squeryl.PrimitiveTypeMode._
 
-import org.squeryl.PrimitiveTypeMode.\_
-
-//Squeryl database interaction must occur in a transaction block :  
-transaction {  
-books.insert(new Author(1, “Michel”,“Folco”))  
-val a = from(authors)(a=\> where(a.lastName === “Folco”) select(a))  
+//Squeryl database interaction must occur in a transaction block:
+transaction {
+  books.insert(new Author(1, “Michel”,“Folco”))
+  val a = from(authors)(a=> where(a.lastName === “Folco”) select(a))
 }
 
-inTransaction {  
-authors.where(a=\> a.lastName === “Pouchkine”)
+inTransaction {
+  authors.where(a=> a.lastName === “Pouchkine”)
 
-//when in a transaction, the current session can be obtained with :  
-val s = Session.currentSession  
-}  
-
+  //when in a transaction, the current session can be obtained with:
+  val s = Session.currentSession
+}
+]]>
 
 </script>
 
-The ‘transaction’ function binds the session to the current thread for
-the duration  
-of the block, so any method called directly **and indirectly** from the
-block  
+The ‘transaction’ function binds the session to the current thread for the duration  
+of the block, so any method called directly **and indirectly** from the block  
 will be *in the context* of the transaction.
 
 ### Distinction between transaction and inTransaction
@@ -83,16 +81,12 @@ code (before any Squeryl code gets to execute).
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
-SessionFactorye.externalTransactionManagementAdapter = Some(  
-() =\> new Session(  
-…obtain the current session here …  
-new OracleAdapter  
-)  
-)
-
-
+<![CDATA[
+SessionFactorye.externalTransactionManagementAdapter = Some(
+  () => new Session(
+    …obtain the current session here …
+    new OracleAdapter))
+]]>
 
 </script>
 
@@ -103,13 +97,11 @@ Given an org.squeryl.Session, Squeryl statements can be issued with the
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-
-using(squerylSession) {  
-// your Squeryl code here…  
+<![CDATA[
+using(squerylSession) {
+  // your Squeryl code here…
 }
-
-
+]]>
 
 </script>
 

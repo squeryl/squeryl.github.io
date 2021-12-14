@@ -27,18 +27,17 @@ or to a scalar, as following example illustrates :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
+val x1:Option[Float] = from(aTable)(t=> compute(avg(t.anInt)))
 
-val x1:Option\[Float\] = from(aTable)(t=\> compute(avg(t.anInt)))
+// or with an ascription:
 
-// or with an ascription :
+val x2 = from(aTable)(t=> compute(avg(t.anInt))) : :Option[Float]
 
-val x2 = from(aTable)(t=\> compute(avg(t.anInt))) : :Option\[Float\]
-
-val t:(Option\[Float\],Option\[String\]) = from(aTable)(t=\>
-compute(avg(t.anInt), min(t.aString)))
-
-
+val t:(Option[Float],Option[String]) = from(aTable)(t=>
+  compute(avg(t.anInt), min(t.aString)))
+]]>
 
 </script>
 
@@ -46,15 +45,14 @@ Instead of the (slightly) more verbose way :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
+val x:Option[Float] = from(aTable)(t =>
+  compute(avg(t.anInt))).single._1
 
-val x:Option\[Float\] = from(aTable)(t=\>
-compute(avg(t.anInt))).single.\_1
-
-val t:(Option\[Float\],Option\[String\]) = from(aTable)(t=\>
-compute(avg(t.anInt), min(t.aString))).single
-
-
+val t:(Option[Float],Option[String]) = from(aTable)(t =>
+  compute(avg(t.anInt), min(t.aString))).single
+]]>
 
 </script>
 
