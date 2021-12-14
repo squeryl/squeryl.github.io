@@ -16,9 +16,9 @@ compile:
 
 <script type="syntaxhighlighter" class="brush: java">
 
-
-scala.Option<int> anOptionalInt  
-
+<![CDATA[
+scala.Option<int> anOptionalInt
+]]>
 
 </script>
 
@@ -26,9 +26,9 @@ While an analogous definition in Scala would compile:
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-
-val anOptionalInt:Option\[Int\]  
-
+<![CDATA[
+val anOptionalInt:Option[Int]
+]]>
 
 </script>
 

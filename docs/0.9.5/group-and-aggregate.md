@@ -49,14 +49,14 @@ Here is an example, the following Squeryl statement :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
-def songCountByArtistId: Query\[GroupWithMeasures\[Long,Long\]\] =  
-from(artists, songs)((a,s) =\>  
-where(a.id === s.artistId)  
-groupBy(a.id)  
-compute(countDistinct(s.id))  
-)  
-
+def songCountByArtistId: Query[GroupWithMeasures[Long,Long]] =
+  from(artists, songs)((a,s) =>
+    where(a.id === s.artistId)
+    groupBy(a.id)  
+    compute(countDistinct(s.id)))
+]]>
 
 </script>
 
@@ -67,18 +67,19 @@ Translates into this SQL statement :
 
 <script type="syntaxhighlighter" class="brush: sql">
 
+<![CDATA[
 
-Select  
-Artist1.id as g0,  
-count(distinct Song2.id) as c0  
-From  
-Artist Artist1,  
-Song Song2  
-Where  
-(Artist1.id = Song2.artistId)  
-Group By  
-Artist1.id  
-
+Select
+  Artist1.id as g0,
+  count(distinct Song2.id) as c0
+From
+  Artist Artist1,
+  Song Song2
+Where
+  (Artist1.id = Song2.artistId)
+Group By
+  Artist1.id
+]]>
 
 </script>
 

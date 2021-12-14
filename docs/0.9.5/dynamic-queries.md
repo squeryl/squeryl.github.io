@@ -25,56 +25,51 @@ query
 Example :
 
 <script type="syntaxhighlighter" class="brush: scala">
+<![CDATA[
 
+def searchForBooks(authorLastName: Option[String], bookTitle: String) =
+  from(authors.inhibitWhen(authorName  None), books)((a,b) =>
+    where(a.get.lastName like authorLastName.get and b.title like bookTitle and a.get.id = b.authorId)
+    select((b,a)))
 
+val result1:List[(Book,Option(Author))] = searchForBooks(None, “Un Loup est un loup”).toList
 
-def searchForBooks(authorLastName: Option\[String\], bookTitle: String)
-=  
-from(authors.inhibitWhen(authorName  None), books)((a,b)=\>
-        where(a.get.lastName like authorLastName.get and b.title like bookTitle and a.get.id =
-b.authorId)  
-select((b,a))  
-)
-
-val result1:List\[(Book,Option(Author))\] = searchForBooks(None, “Un
-Loup est un loup”).toList
-
-val result2:List\[(Book,Option(Author))\] = searchForBooks(“Tolstoi”,
-“War and Peace”).toList  
-
+val result2:List[(Book,Option(Author))] = searchForBooks(“Tolstoi”,“War and Peace”).toList
+]]>
 
 </script>
 
-Notice the Option\[\] in the result type of the query, and how the
-Author  
-table disappears from the generated SQL base on the input of
-**inhibitWhen** :
+Notice the Option\[\] in the result type of the query, and how the Author
+table disappears from the generated SQL base on the input of **inhibitWhen**:
+
+— first query: searchForBooks(None, “Un Loup est un loup”).toList
 
 <script type="syntaxhighlighter" class="brush: sql">
+<![CDATA[
 
-
-
-— first query : searchForBooks(None, “Un Loup est un loup”).toList
-
-Select \*  
-from  
-Book b  
-where  
-b.title like ? — ‘Un Loup est un loup’
+Select *
+  from
+  Book b
+  where
+  b.title like ? — ‘Un Loup est un loup’
+]]>
 
 — second query : searchForBooks(“Tolstoi”, “War and Peace”).toList
 
-Select \*  
-from  
-Author a,  
-Book b  
-where  
-a.lastName like ? and — “Tolstoi”  
-b.title like ? and — “War and Peace”  
-a.id = b.authorId  
+<script type="syntaxhighlighter" class="brush: sql">
+<![CDATA[
 
+Select *
+  from
+  Author a,
+  Book b
+  where
+    a.lastName like ? and — “Tolstoi”
+    b.title like ? and — “War and Peace”
+    a.id = b.authorId
+]]>
 
 </script>
 
-<a name='dyn-where-clause'></a>  
+<a name='dyn-where-clause'></a>
 {% include 0.9.5/feature-dyn-where-clause.html%}

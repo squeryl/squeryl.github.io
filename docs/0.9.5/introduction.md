@@ -32,15 +32,15 @@ Here is a comparison of a Squeryl and a JPA version of the same query :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
-//All is validated at compile time here :
+<![CDATA[
+//All is validated at compile time here:
 
-var avg: Option\[Float\] = // The compiler ‘knows’ that this query
-returns an Option\[Float\]  
-from(grades)(g =\>  
-// mathId has to by type compatible with g.subjectId to compile  
-where(g.subjectId === mathId)  
-compute(avg(g.scoreInPercentage))  
-)
+var avg: Option[Float] = // The compiler ‘knows’ that this query returns an Option[Float]
+  from(grades)(g =>
+    // mathId has to by type compatible with g.subjectId to compile
+    where(g.subjectId === mathId)
+    compute(avg(g.scoreInPercentage)))
+]]>
 
 </script>
 <!--
@@ -56,21 +56,23 @@ The equivalent JPA query invocation is subject to a runtime failure at
 five places :
 
 <script type="syntaxhighlighter" class="brush: java">
-// Equivalent JPA query  
-Query q = entityManager.createQuery(  
-//We’ll get an SQLException if there’s a typo here :  
-“SELECT AVG (g.scoreInPercentage) FROM Grades g where g.subjectId =
-:subjectId”);
 
-// a runtime exception if mathId is of the wrong type  
+<![CDATA[
+// Equivalent JPA query
+Query q = entityManager.createQuery(
+  //We’ll get an SQLException if there’s a typo here:
+  “SELECT AVG (g.scoreInPercentage) FROM Grades g where g.subjectId = :subjectId”);
+
+// a runtime exception if mathId is of the wrong type
 q.setParameter(1, mathId); // or if 1 is not the right index
 
-// ClassCastExeption possible  
+// ClassCastExeption possible
 Number avg = (Number) q.getSingleResult();
 
-// NullPointerException if the query returns null  
-//(ex.: if there are no math Grades in the table)  
-avg.floatValue();  
+// NullPointerException if the query returns null
+//(ex.: if there are no math Grades in the table)
+avg.floatValue();
+]]>
 
 </script>
 

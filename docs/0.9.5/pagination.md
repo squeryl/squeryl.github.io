@@ -11,23 +11,23 @@ Example :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
 
-
-def searchForBooks(title : String, offset: Int, pageLength: Int) =  
-from(books)(b =\>  
-where(b.title like title)  
-select(b)  
-orderBy(b.title asc)  
-).page(offset, pageLength)
+def searchForBooks(title: String, offset: Int, pageLength: Int) =
+  from(books)(b =>
+    where(b.title like title)
+    select(b)
+    orderBy(b.title asc)
+  ).page(offset, pageLength)
 
 val pageLength = 10
 
-val page1 = searchForBooks(“The Art of%”, pageLength \* 0, pageLength)
+val page1 = searchForBooks(“The Art of%”, pageLength * 0, pageLength)
 
-val page2 = searchForBooks(“The Art of%”, pageLength \* 1, pageLength)
+val page2 = searchForBooks(“The Art of%”, pageLength * 1, pageLength)
 
-val page3 = searchForBooks(“The Art of%”, pageLength \* 2, pageLength)  
-
+val page3 = searchForBooks(“The Art of%”, pageLength * 2, pageLength)
+]]>
 
 </script>
 

@@ -40,24 +40,18 @@ Here are some examples :
 
 <script type="syntaxhighlighter" class="brush: scala">
 
+<![CDATA[
+val q1 = from(aTable)(t => select( &(t.aLong * t.aFloat) )): Query[Double]
 
+val q2 = from(aTable)(t => compute( avg(t.aByte / t.anInt) )): Query[Option[Float]]
 
-val q1 =  
-from(aTable)(t =\> select( &(t.aLong \* t.aFloat) )) : Query\[Double\]
+val q3 = from(aTable)(t => compute( t.aByte + count )): Query[Long]
 
-val q2 =  
-from(aTable)(t =\> compute( avg(t.aByte / t.anInt) )) :
-Query\[Option\[Float\]\]
-
-val q3 =  
-from(aTable)(t =\> compute( t.aByte + count )) : Query\[Long\]
-
-val q4 = // \|\| is the concatenation operator :  
-from(aTable)(t =\>  
-select( &(t.aString \|\| t.aLong \|\| " " \|\| a.IntOption) )) :
-Query\[Option\[String\]\]
-
-
+val q4 = // || is the concatenation operator:
+from(aTable)(t =>
+  select( &(t.aString || t.aLong || " " || a.IntOption) )):
+  Query[Option[String]]
+]]>
 
 </script>
 
